@@ -1,0 +1,32 @@
+library(ape)
+
+setwd("/Users/ChatNoir/Projects/Squam/scripts/Constraints")
+t <- read.tree("Streicher_IQ_sclero_tree.txt")
+y <- ladderize(t, right = TRUE)
+pdf(file = "Sclero.pdf", width = 2, height = 10)
+plot(y,cex=0.5,no.margin=TRUE)
+dev.off()
+
+t <- read.tree("Streicher_IQ_toxpoly_tree.txt")
+y <- ladderize(t, right = TRUE)
+pdf(file = "ToxPoly.pdf", width = 2, height = 10)
+plot(y,cex=0.5,no.margin=TRUE)
+dev.off()
+
+t <- read.tree("Streicher_IQ_toxai_tree.txt")
+y <- ladderize(t, right = TRUE)
+pdf(file = "ToxAI.pdf", width = 2, height = 10)
+plot(y,cex=0.5,no.margin=TRUE)
+dev.off()
+
+t <- read.tree("Streicher_IQ_toxsa_tree.txt")
+y <- ladderize(t, right = TRUE)
+pdf(file = "ToxSA.pdf", width = 2, height = 10)
+plot(y,cex=0.5,no.margin=TRUE)
+dev.off()
+
+t <- read.tree("Streicher_IQ_toxsi_tree.txt")
+y <- ladderize(t, right = TRUE)
+pdf(file = "ToxSI.pdf", width = 2, height = 10)
+plot(y,cex=0.5,no.margin=TRUE)
+dev.off()

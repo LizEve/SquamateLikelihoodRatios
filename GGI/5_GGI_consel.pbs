@@ -1,0 +1,40 @@
+#!/bin/bash
+#PBS -q workq
+#PBS -l nodes=1:ppn=16
+#PBS -l walltime=1:00:00
+#PBS -N consel
+#PBS -o $PBS_JOBNAME.out
+#PBS -e $PBS_JOBNAME.err
+#PBS -A hpc_jembrown01
+
+# This script runs consel with GNU parallel to implement the AU test on the per-site likelihoods calculated by RAxML.
+# It requires two files: consel.sh (included) and consel.input.files
+#	consel.input.files is a file containing one line for each UCE locus as follows:
+#		path/to/treepuzzle_lnL_file
+
+# Run the following line when job is complete to check that all tasks have finished:
+#	awk 'NR > 1 && $7 > "0" { print $10 }' LOGFILE_NAME > files
+
+# Finally, concatenate all the outfiles (produced by catpv $FILE > $FILE.out) into one file.
+#	cat *.out > ALL_consel.txt
+
+date
+
+export JOBS_PER_NODE=16
+
+cd $PBS_O_WORKDIR
+
+parallel --progress \
+	--joblog logfile.$PBS_JOBID \
+	-j $JOBS_PER_NODE \
+	--slf $PBS_NODEFILE \
+	--workdir $PBS_O_WORKDIR \
+	--colsep ' ' \
+	$PBS_O_WORKDIR/consel.sh :::: consel.input.files
+
+date
+
+exit 0
+
+
+

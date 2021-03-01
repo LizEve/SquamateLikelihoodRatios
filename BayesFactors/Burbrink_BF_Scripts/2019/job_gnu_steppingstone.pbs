@@ -1,0 +1,50 @@
+#!/bin/bash
+#PBS -q workq
+#PBS -l nodes=6:ppn=16
+#PBS -l walltime=72:00:00
+#PBS -N log_burbrink_ss_mb
+#PBS -o $PBS_JOBNAME.out
+#PBS -e $PBS_JOBNAME.err
+#PBS -A hpc_jembrown01
+
+runName="burbrink_ss_mb"
+input='gene.list'
+donelist='donelist_'$runName'.txt'
+
+WDIR=$PBS_O_WORKDIR
+#WDIR=`pwd`
+JOBS_PER_NODE=8
+TASK="$WDIR/gnu_task_ss.sh"
+FILES="$WDIR/$input"
+
+cd $WDIR
+#rm $input
+#rm $donelist
+
+'''
+for f in *.nex
+do
+run=`echo ${f%%.*}`
+outfile=`echo $run'/'$run'.toxsi.ss'`
+echo $outfile
+if [ -f $outfile ]
+then
+    echo $(wc -l <"$outfile")
+    if [[ $(wc -l <"$outfile") -eq 57 ]]
+    then
+        echo $WDIR'/'$run'/' >> $donelist
+    else
+        echo $WDIR'/'$run'/' >> $input
+    fi
+else
+    echo $WDIR'/'$run'/' >> $input
+fi
+done
+'''
+
+# Set up parallel call
+# set log file, pass workers, whatever nodefile is, and working directory
+PARALLEL="parallel -j $JOBS_PER_NODE --slf $PBS_NODEFILE --wd $WDIR"
+
+# Now call parallel and pass files and task. 
+$PARALLEL -a $FILES sh $TASK {} 

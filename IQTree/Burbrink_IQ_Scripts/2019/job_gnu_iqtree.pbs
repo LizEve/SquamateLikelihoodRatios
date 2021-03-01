@@ -1,0 +1,35 @@
+#!/bin/bash
+#PBS -q workq
+#PBS -l nodes=6:ppn=16
+#PBS -l walltime=72:00:00
+#PBS -N log_burbrink_iq
+#PBS -o $PBS_JOBNAME.out
+#PBS -e $PBS_JOBNAME.err
+#PBS -A hpc_jembrown01
+
+runName="burbrink_iq"
+input='input_'$runName'.txt'
+WDIR=$PBS_O_WORKDIR
+cd $WDIR 
+
+rm $input
+
+# this is just making a list of input files
+# you want a text file with each line as a full path to a sequence alignment file that is the input to iqtree call. 
+for f in *.nex
+do
+r=$(basename "$f" .nex)
+echo ${WDIR}/${r}/ >> $input
+done
+
+JOBS_PER_NODE=8
+TASK="$WDIR/gnu_task_iq.sh"
+FILES="$WDIR/$input"
+
+
+# Set up parallel call
+# set log file, pass workers, whatever nodefile is, and working directory
+PARALLEL="parallel -j $JOBS_PER_NODE --slf $PBS_NODEFILE --wd $WDIR"
+
+# Now call parallel and pass files and task.
+$PARALLEL -a $FILES sh $TASK {}

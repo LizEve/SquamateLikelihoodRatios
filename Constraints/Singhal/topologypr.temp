@@ -1,0 +1,3 @@
+prset topologypr = constraints (
+Outgroup,Iguania,Viperidae,Anguimorpha,Gekkota,Elapoidea,Lacertidae,TeiidaeGymno,Colubroidea,Scincoidea,Snake,Sclero,ToxPoly,ToxAI,ToxSA,ToxSI
+);

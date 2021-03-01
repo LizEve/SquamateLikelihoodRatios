@@ -1,0 +1,3 @@
+prset topologypr = constraints (
+Acrochordidae,Amphisbaenia,Anguimorpha,Anomalepididae,Boinae,Colubroidea,Cylindrophiidae,Elapoidea,Gekkota,Gerrhopilidae,TeiidaeGymno,Iguania,Lacertidae,Leiosauridae,Leptotyphlopidae,Pythonidae,Scincoidea,Tropidophiidae,Typhlopidae,Uropeltidae,Viperidae,Snake,Sclero,ToxPoly,ToxAI,ToxSA,ToxSI
+);

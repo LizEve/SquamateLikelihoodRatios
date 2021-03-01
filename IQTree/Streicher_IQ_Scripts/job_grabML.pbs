@@ -1,0 +1,17 @@
+#!/bin/bash
+#PBS -q single
+#PBS -l nodes=1:ppn=1
+#PBS -l walltime=10:00:00
+#PBS -N log_grabML
+#PBS -o $PBS_JOBNAME.out
+#PBS -e $PBS_JOBNAME.err
+#PBS -A hpc_phyleaux11
+
+
+WDIR=$PBS_O_WORKDIR
+cd $WDIR
+
+chmod 777 GrabMaxLike.sh
+rm folder.list
+ls -d -- */ &> folder.list
+./GrabMaxLike.sh 'MaxLikeSummary.txt' 'folder.list'

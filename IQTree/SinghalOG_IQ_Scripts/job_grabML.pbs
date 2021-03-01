@@ -1,0 +1,32 @@
+#!/bin/bash
+#PBS -q single
+#PBS -l nodes=1:ppn=1
+#PBS -l walltime=10:00:00
+#PBS -N log_grabML
+#PBS -o $PBS_JOBNAME.out
+#PBS -e $PBS_JOBNAME.err
+#PBS -A hpc_phyleaux11
+
+
+WDIR=$PBS_O_WORKDIR
+cd $WDIR
+
+chmod 777 GrabMaxLike.sh
+rm folder.list
+ls -d -- */ &> folder.list
+./GrabMargLike.sh 'MaxLikeSummary.txt' 'folder.list'
+
+#If a cell is empty, use this to replace with NA. It's super hacky, dont come at me
+sed -e $'s/\t\t/\tNA\t/g' MaxLikeSummary.txt| sed -e $'s/\t\t/\tNA\t/g' > MaxLikeSummaryNA.txt
+
+
+echo 'MaxLikeSummary.txt'
+wc -l MaxLikeSummary.txt
+
+echo 'gene.list'
+wc -l gene.list
+
+echo 'folder.list'
+wc -l folder.list
+
+

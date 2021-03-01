@@ -1,0 +1,22 @@
+#!/bin/bash
+#PBS -q single
+#PBS -l nodes=1:ppn=1
+#PBS -l walltime=1:00:00
+#PBS -N log_check_ss
+#PBS -o $PBS_JOBNAME.out
+#PBS -e $PBS_JOBNAME.err
+#PBS -A hpc_phyleaux11
+
+
+WDIR=$PBS_O_WORKDIR
+cd $WDIR
+
+echo 'all loci'
+ls *nex | wc -l 
+
+echo 'sclero.ss'
+ls */*sclero.ss | wc -l
+
+echo 'toxpoly.ss'
+ls */*.toxpoly.ss | wc -l
+

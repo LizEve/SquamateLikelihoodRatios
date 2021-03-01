@@ -1,0 +1,26 @@
+#!/bin/bash
+#PBS -q workq
+#PBS -l nodes=6:ppn=16
+#PBS -l walltime=72:00:00
+#PBS -N log_burbrink_ss_mb
+#PBS -o $PBS_JOBNAME.out
+#PBS -e $PBS_JOBNAME.err
+#PBS -A hpc_phyleaux11
+
+WDIR=$PBS_O_WORKDIR
+cd $WDIR
+
+input='gene.list'
+
+JOBS_PER_NODE=4
+TASK="$WDIR/gnu_task_ss.sh"
+FILES="$WDIR/$input"
+
+cd $WDIR
+
+# Set up parallel call
+# set log file, pass workers, whatever nodefile is, and working directory
+PARALLEL="parallel -j $JOBS_PER_NODE --slf $PBS_NODEFILE --wd $WDIR"
+
+# Now call parallel and pass files and task. 
+$PARALLEL -a $FILES sh $TASK {} 

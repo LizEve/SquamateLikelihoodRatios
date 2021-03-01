@@ -1,0 +1,144 @@
+	constraint Iguania 
+	constraint ToxPoly 
+	constraint ToxAI ha
+	constraint ToxSI ha
+	constraint Iguania 
+	constraint ToxPoly 
+	constraint ToxAI ha
+	constraint ToxSI ha
+	constraint Iguania 
+	constraint ToxPoly 
+	constraint ToxAI ha
+	constraint ToxSI ha
+	constraint Iguania 
+	constraint ToxPoly 
+	constraint ToxAI ha
+	constraint ToxSI ha
+	constraint Iguania 
+	constraint ToxPoly 
+	constraint ToxAI ha
+	constraint ToxSI ha
+	constraint Iguania 
+	constraint ToxPoly 
+	constraint ToxAI ha
+	constraint ToxSI ha
+	constraint Iguania 
+	constraint ToxPoly 
+	constraint ToxAI ha
+	constraint ToxSI ha
+	constraint Iguania 
+	constraint ToxPoly 
+	constraint ToxAI ha
+	constraint ToxSI ha
+	constraint Iguania 
+	constraint ToxPoly 
+	constraint ToxAI ha
+	constraint ToxSI ha
+	constraint Iguania 
+	constraint ToxPoly 
+	constraint ToxAI ha
+	constraint ToxSI ha
+	constraint Iguania 
+	constraint ToxPoly 
+	constraint ToxAI ha
+	constraint ToxSI ha
+	constraint Iguania 
+	constraint ToxPoly 
+	constraint ToxAI ha
+	constraint ToxSI ha
+	constraint Iguania 
+	constraint ToxPoly 
+	constraint ToxAI ha
+	constraint ToxSI ha
+	constraint Iguania 
+	constraint ToxPoly 
+	constraint ToxAI ha
+	constraint ToxSI ha
+	constraint Iguania 
+	constraint ToxPoly 
+	constraint ToxAI ha
+	constraint ToxSI ha
+	constraint Iguania 
+	constraint ToxPoly 
+	constraint ToxAI ha
+	constraint ToxSI ha
+	constraint Iguania 
+	constraint ToxPoly 
+	constraint ToxAI ha
+	constraint ToxSI ha
+	constraint Iguania 
+	constraint ToxPoly 
+	constraint ToxAI ha
+	constraint ToxSI ha
+	constraint Iguania 
+	constraint ToxPoly 
+	constraint ToxAI ha
+	constraint ToxSI ha
+	constraint Iguania 
+	constraint ToxPoly 
+	constraint ToxAI ha
+	constraint ToxSI ha
+	constraint Iguania 
+	constraint ToxPoly 
+	constraint ToxAI ha
+	constraint ToxSI ha
+	constraint Iguania 
+	constraint ToxPoly 
+	constraint ToxAI ha
+	constraint ToxSI ha
+	constraint Iguania 
+	constraint ToxPoly 
+	constraint ToxAI ha
+	constraint ToxSI ha
+	constraint Iguania 
+	constraint ToxPoly 
+	constraint ToxAI ha
+	constraint ToxSI ha
+	constraint Iguania 
+	constraint ToxPoly 
+	constraint ToxAI ha
+	constraint ToxSI ha
+	constraint Iguania 
+	constraint ToxPoly 
+	constraint ToxAI ha
+	constraint ToxSI ha
+	constraint Iguania 
+	constraint ToxPoly 
+	constraint ToxAI ha
+	constraint ToxSI ha
+	constraint Iguania 
+	constraint ToxPoly 
+	constraint ToxAI ha
+	constraint ToxSI ha
+	constraint Iguania 
+	constraint ToxPoly 
+	constraint ToxAI ha
+	constraint ToxSI ha
+	constraint Iguania 
+	constraint ToxPoly 
+	constraint ToxAI ha
+	constraint ToxSI ha
+	constraint Iguania 
+	constraint ToxPoly 
+	constraint ToxAI ha
+	constraint ToxSI ha
+	constraint Iguania 
+	constraint ToxPoly 
+	constraint ToxAI ha
+	constraint ToxSI ha
+	constraint Iguania 
+	constraint ToxPoly 
+	constraint ToxAI ha
+	constraint ToxSI ha
+	constraint Iguania 
+	constraint ToxPoly 
+	constraint ToxAI ha
+	constraint ToxSI ha
+	constraint Iguania 
+	constraint ToxPoly 
+	constraint ToxAI ha
+	constraint ToxSI ha
+	constraint Iguania 
+	constraint ToxPoly 
+	constraint ToxAI ha
+	constraint ToxSI ha
