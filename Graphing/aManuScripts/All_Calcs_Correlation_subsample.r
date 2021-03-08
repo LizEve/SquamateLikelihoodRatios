@@ -1,5 +1,6 @@
 
 rm(list=ls())
+# 2021 - do not have to redo this with fixed subsample
 
 ##################################################################################################
 ## Test correlation across all hypotheses 

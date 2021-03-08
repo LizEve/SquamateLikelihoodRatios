@@ -32,7 +32,7 @@ mid$propLoci <- mid$Loci/totalLoci
 # Select null distributions for 2k-4k 
 null2k4k <- results %>% filter(Loci >= 2000) 
 null4k <- results %>% filter(Loci >= 4000) 
-
+null2k <- results %>% filter(Loci >= 2000) %>% filter(Loci <= 4000) 
 
 
 #------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -41,7 +41,7 @@ null4k <- results %>% filter(Loci >= 4000)
 
 #------------------------------------------------------------------------------------------------------------------------------------------------------
 h <- 'TvS'
-n <- null2k4k %>% filter(Hypothesis == h) 
+n <- null2k %>% filter(Hypothesis == h) 
 s <- '80m'
 m <- mid %>% filter(Hypothesis == h) %>% filter(Sample == s)
 e <- m$corr.eff
@@ -53,7 +53,7 @@ e <- m$corr.eff
 p.s <- sum(abs(n$corr.eff) >= abs(e)) / length(n$corr.eff)
 p.s
 h <- 'AIvSA'
-n <- null2k4k %>% filter(Hypothesis == h) 
+n <- null2k %>% filter(Hypothesis == h) 
 s <- '80m'
 m <- mid %>% filter(Hypothesis == h) %>% filter(Sample == s)
 e <- m$corr.eff
@@ -65,7 +65,7 @@ e <- m$corr.eff
 p.s <- sum(abs(n$corr.eff) >= abs(e)) / length(n$corr.eff)
 p.s
 h <- 'AIvSA'
-n <- null2k4k %>% filter(Hypothesis == h) 
+n <- null2k %>% filter(Hypothesis == h) 
 s <- '80m'
 m <- mid %>% filter(Hypothesis == h) %>% filter(Sample == s)
 e <- m$corr.eff
@@ -77,7 +77,7 @@ e <- m$corr.eff
 p.s <- sum(abs(n$corr.eff) >= abs(e)) / length(n$corr.eff)
 p.s
 h <- 'AIvSI'
-n <- null2k4k %>% filter(Hypothesis == h) 
+n <- null2k %>% filter(Hypothesis == h) 
 s <- '80m'
 m <- mid %>% filter(Hypothesis == h) %>% filter(Sample == s)
 e <- m$corr.eff
@@ -89,7 +89,7 @@ e <- m$corr.eff
 p.s <- sum(abs(n$corr.eff) >= abs(e)) / length(n$corr.eff)
 p.s
 h <- 'SAvSI'
-n <- null2k4k %>% filter(Hypothesis == h) 
+n <- null2k %>% filter(Hypothesis == h) 
 s <- '80m'
 m <- mid %>% filter(Hypothesis == h) %>% filter(Sample == s)
 e <- m$corr.eff

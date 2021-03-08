@@ -13,8 +13,31 @@ library(viridis)
 praise()
 
 setwd("/Users/ChatNoir/Projects/Squam/scripts_ch1/Graphing/DataFiles")
-load("Calcs_Smoosh.RData")
+load("Calcs_Smoosh2021.RData")
 setwd("/Users/ChatNoir/Projects/Squam/Graphs/")
+
+
+# Need to redo subsets without splitting by dataset ------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+# all bf within and all gl within. agnostic to other value. gl in OR bf in 
+all.60m <- all %>% group_by(variable) %>% 
+  filter(between(GL,quantile(GL,0.2),quantile(GL, 0.8)) | 
+           between(BF,quantile(BF,0.2),quantile(BF, 0.8)))
+
+all.80m <- all %>% group_by(variable) %>% 
+  filter(between(GL,quantile(GL,0.1),quantile(GL, 0.9)) | 
+           between(BF,quantile(BF,0.1),quantile(BF, 0.9)))
+
+# both within - gl AND bf within  
+all.60mb <- all %>% group_by(variable) %>% 
+  filter(between(GL,quantile(GL,0.2),quantile(GL, 0.8)) , 
+         between(BF,quantile(BF,0.2),quantile(BF, 0.8)))
+
+all.80mb <- all %>% group_by(variable) %>% 
+  filter(between(GL,quantile(GL,0.1),quantile(GL, 0.9)) , 
+         between(BF,quantile(BF,0.1),quantile(BF, 0.9)))
+
 rm(list=setdiff(ls(), c("all","all.80m","all.80mb","all.60m","all.60mb")))
 
 # Smash for scatter 
@@ -24,35 +47,12 @@ df.m <- full_join(full_join(all.60m,all.80m,by=c('Locus', "variable", "dataSet",
 df.mb <- full_join(full_join(all.60mb,all.80mb,by=c('Locus', "variable", "dataSet", "diff"), suffix = c("60mb","80mb")), all, by=c('Locus', "variable", "dataSet", "diff"))
 
 
-# Mash data - another way
-# Add column of Sample 
-# all['Sample'] = 'all'
-# all.80m['Sample'] = '80m'
-# all.80mb['Sample'] = '80mb'
-# all.60m['Sample'] = '60m'
-# all.60mb['Sample'] = '60mb'
-# # Mash
-# x <- full_join(all.60m,all.80m, by=c('Locus', "variable", "GL", "BF", "dataSet", "diff"))
-# y <- full_join(x,all, by=c('Locus', "variable", "GL", "BF", "dataSet", "diff"))
-# z <- y %>% mutate(Subsample = coalesce(Sample.x, Sample.y,Sample))%>% select(-c(Sample.y, Sample.x, Sample))
-# df.og <- z %>% filter(variable == h)
-# scat.og <- ggplot(df.og, aes(x=GL,y=BF)) + 
-#   geom_point(alpha=0.75, aes(color=Subsample), size=.75) + 
-#   theme_bw() + theme(panel.border = element_blank(), legend.position = "none") + 
-#   scale_color_manual(values=c("midnightblue","slateblue1", "#B63679FF")) + 
-#   ggtitle("og")
-# quartz()
-# scat.og
-
-#rm(list=setdiff(ls(), c("z")))
-
 # Linear Regression Functions------------------------------------------------------------------------------------------------------------------------------------------------------
 
-lm_eqn = function(xvals,yvals){
+lm_eqn = function(subset,xvals,yvals){
   m = lm(yvals ~ xvals) #y ~ x
-  eq <- substitute(italic(y) == a + b %.% italic(x)*",  "~~italic(r)^2~"="~r2, 
-                   list(a = format(unname(coef(m)[1]), digits = 2), 
-                        b = format(unname(coef(m)[2]), digits = 2), 
+  eq <- substitute(s*": "~~italic(r)^2~"="~r2, 
+                   list(s = format(subset), 
                         r2 = format(summary(m)$r.squared, digits = 2)))
   as.character(as.expression(eq));
 }
@@ -79,7 +79,7 @@ mytheme <- theme_bw() + theme(panel.border = element_blank()) +
 # https://www.hexcolortool.com/#b5367e
 quartz()
 
-h <- 'AIvSA'
+h <- 'TvS'
 
 # dataset 
 df <- df.m %>% filter(variable == h)
@@ -92,9 +92,9 @@ y.tic <- seq(-150,150,20)
 #xe <- mean(range(df$GL))
 xe <- -40
 
-d.eqn <- data.frame(GL = xe, BF = 60, eqn = lm_eqn(df$GL,df$BF))
-d.eqn.80 <- data.frame(GL = xe, BF = 50, eqn = lm_eqn(df$GL80m,df$BF80m))
-d.eqn.60 <- data.frame(GL = xe, BF = 40, eqn = lm_eqn(df$GL60m,df$BF60m))
+d.eqn <- data.frame(GL = xe, BF = 60, eqn = lm_eqn("all",df$GL,df$BF))
+d.eqn.80 <- data.frame(GL = xe, BF = 50, eqn = lm_eqn("80m",df$GL80m,df$BF80m))
+d.eqn.60 <- data.frame(GL = xe, BF = 40, eqn = lm_eqn("60m",df$GL60m,df$BF60m))
 
 scat <- ggplot(df) + 
   geom_point(aes(GL,BF),alpha=0.5,size=0.5,color="#B63679FF") + 
@@ -115,7 +115,7 @@ scat <- ggplot(df) +
 scat
 
 
-ggsave(paste("Alldata",h,"scatter_lrm2.pdf",sep="_"), plot=scat,width = 4, height = 3, units = "in", device = 'pdf',bg = "transparent")
+ggsave(paste("Combineddata",h,"scatter_lrm2.pdf",sep="_"), plot=scat,width = 4, height = 3, units = "in", device = 'pdf',bg = "transparent")
 
 
 
@@ -250,4 +250,39 @@ scat
 
 
 ggsave(paste("Alldata",h,"scatter_lrmb.pdf",sep="_"), plot=scat,width = 8, height = 6, units = "in", device = 'pdf',bg = "transparent")
+
+## Depreciated 
+
+
+# Mash data - another way
+# Add column of Sample 
+# all['Sample'] = 'all'
+# all.80m['Sample'] = '80m'
+# all.80mb['Sample'] = '80mb'
+# all.60m['Sample'] = '60m'
+# all.60mb['Sample'] = '60mb'
+# # Mash
+# x <- full_join(all.60m,all.80m, by=c('Locus', "variable", "GL", "BF", "dataSet", "diff"))
+# y <- full_join(x,all, by=c('Locus', "variable", "GL", "BF", "dataSet", "diff"))
+# z <- y %>% mutate(Subsample = coalesce(Sample.x, Sample.y,Sample))%>% select(-c(Sample.y, Sample.x, Sample))
+# df.og <- z %>% filter(variable == h)
+# scat.og <- ggplot(df.og, aes(x=GL,y=BF)) + 
+#   geom_point(alpha=0.75, aes(color=Subsample), size=.75) + 
+#   theme_bw() + theme(panel.border = element_blank(), legend.position = "none") + 
+#   scale_color_manual(values=c("midnightblue","slateblue1", "#B63679FF")) + 
+#   ggtitle("og")
+# quartz()
+# scat.og
+
+#rm(list=setdiff(ls(), c("z")))
+
+# lm_eqn = function(xvals,yvals){
+#   m = lm(yvals ~ xvals) #y ~ x
+#   eq <- substitute(italic(y) == a + b %.% italic(x)*",  "~~italic(r)^2~"="~r2, 
+#                    list(a = format(unname(coef(m)[1]), digits = 2), 
+#                         b = format(unname(coef(m)[2]), digits = 2), 
+#                         r2 = format(summary(m)$r.squared, digits = 2)))
+#   as.character(as.expression(eq));
+# }
+# 
 
