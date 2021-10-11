@@ -1,1 +1,0 @@
-prset topologypr = constraints (Sclero, ToxPoly, ToxAI, ToxSA, ToxSI, Outgroup, Iguania, Viperidae, Gekkota, Elapoidea, Lacertidae, Anguimorpha, Teiidae, Colubroidea, Scincoidea, Gymnophthalmidae, Dactyloidae, Gekkonidae, Elapidae, Sphenodontidae, Dipsadidae, Scincidae, Colubridae, Snake);
